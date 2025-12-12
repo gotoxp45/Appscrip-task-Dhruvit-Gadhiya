@@ -1,0 +1,269 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 199;
+  display: none;
+}
+
+.sidebar {
+  width: 280px;
+  min-height: calc(100vh - 80px);
+  background-color: #ffffff;
+  border-right: 1px solid #e5e5e5;
+  padding: 0;
+  position: sticky;
+  top: 80px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebarHeader {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.itemCount {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.count {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #252525;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+}
+
+.filterHeader {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.hideFilterCheckbox {
+  margin-right: 8px;
+}
+
+.hideFilterLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.filtersContainer {
+  padding-bottom: 20px;
+}
+
+.filterSection {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.filterTitle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  color: #222222;
+  transition: background-color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.filterTitle:hover {
+  background-color: #f8f9fa;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+  font-size: 10px;
+  color: #666;
+}
+
+.arrowUp {
+  transform: rotate(180deg);
+}
+
+.filterOptions {
+  padding: 0 20px 15px 20px;
+}
+
+.selectAll {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.unselectAll {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  color: #8f8f9a;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+}
+
+.filterOption {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #333;
+}
+
+.filterCheckbox {
+  display: none;
+}
+
+.checkboxCustom {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  margin-right: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterCheckbox:checked + .checkboxCustom {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.filterCheckbox:checked + .checkboxCustom::after {
+  content: '✓';
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.optionText {
+  user-select: none;
+  font-size: 12px;
+}
+
+.filterSummary {
+  padding: 0 20px 12px 20px;
+  font-size: 12px;
+  color: #000000;
+}
+
+.customizableRow {
+  display: flex;
+  align-items: center;
+  padding: 18px 20px;
+  gap: 10px;
+}
+
+.customizableLabel {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #333333;
+}
+
+.clearButton {
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.clearButton:hover {
+  background-color: #c82333;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .overlay {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    z-index: 200;
+    transition: left 0.3s ease;
+  }
+
+  .sidebarOpen {
+    left: 0;
+  }
+
+  .sidebarHeader {
+    display: flex;
+  }
+
+  .itemCount {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 85%;
+  }
+
+  .filterTitle {
+    padding: 15px;
+    font-size: 13px;
+  }
+
+  .filterOptions {
+    padding: 0 15px 15px 15px;
+  }
+
+  .filterOption {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .clearButton {
+    margin: 15px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}

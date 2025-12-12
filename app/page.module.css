@@ -1,0 +1,50 @@
+/* Product Listing Page Styles - Clean and minimal */
+.page {
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.errorContainer {
+  padding: 2rem;
+  text-align: center;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorContainer h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 1rem;
+}
+
+.errorContainer p {
+  color: #666666;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .errorContainer {
+    padding: 1rem;
+  }
+  
+  .errorContainer h1 {
+    font-size: 1.25rem;
+  }
+  
+  .errorContainer p {
+    font-size: 0.875rem;
+  }
+}
