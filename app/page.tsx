@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getAllProducts, getCategories } from '@/lib/api';
+import { getAllProducts } from '@/lib/api';
 import { Product } from '@/types/product';
 import Header from '@/components/Header/Header';
 import ProductListingPage from '@/components/ProductListingPage/ProductListingPage';
@@ -13,16 +13,10 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   let products: Product[] = [];
-  let categories: Awaited<ReturnType<typeof getCategories>> = [] as Awaited<
-    ReturnType<typeof getCategories>
-  >;
   let hasError = false;
 
   try {
-    [products, categories] = await Promise.all([
-      getAllProducts(),
-      getCategories(),
-    ]);
+    products = await getAllProducts();
   } catch (error) {
     console.error('Error loading page:', error);
     hasError = true;
@@ -52,7 +46,6 @@ export default async function Home() {
         ) : (
           <ProductListingPage
             initialProducts={products}
-            categories={categories}
           />
         )}
       </main>

@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import styles from './Sidebar.module.css';
 
 interface SidebarProps {
-  categories: string[];
   onFilterChange: (filters: FilterState) => void;
   isOpen: boolean;
   onClose: () => void;
@@ -25,7 +24,7 @@ interface FilterState {
 
 type CheckboxFilterKey = Exclude<keyof FilterState, 'priceRange'>;
 
-const Sidebar: React.FC<SidebarProps> = ({ categories, onFilterChange, isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onFilterChange, isOpen, onClose }) => {
   const [isHydrated, setIsHydrated] = useState(false);
   
   const [filters, setFilters] = useState<FilterState>({

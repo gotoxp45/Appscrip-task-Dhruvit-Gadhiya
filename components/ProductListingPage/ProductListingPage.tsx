@@ -9,7 +9,6 @@ import styles from './ProductListingPage.module.css';
 
 interface ProductListingPageProps {
   initialProducts: Product[];
-  categories: string[];
 }
 
 interface FilterState {
@@ -27,8 +26,7 @@ interface FilterState {
 type SortOption = 'recommended' | 'newest' | 'popular' | 'price-high' | 'price-low';
 
 const ProductListingPage: React.FC<ProductListingPageProps> = ({
-  initialProducts,
-  categories
+  initialProducts
 }) => {
   const [isHydrated, setIsHydrated] = useState(false);
   const [products] = useState<Product[]>(initialProducts);
@@ -46,6 +44,11 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
   const [sortBy, setSortBy] = useState<SortOption>('recommended');
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [footerSectionsOpen, setFooterSectionsOpen] = useState({
+    metaMuse: false,
+    quickLinks: false,
+    followUs: false,
+  });
 
   useEffect(() => {
     setTimeout(() => {
@@ -121,6 +124,16 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
   const closeSidebar = useCallback(() => {
     setIsSidebarOpen(false);
   }, []);
+
+  const toggleFooterSection = useCallback(
+    (section: 'metaMuse' | 'quickLinks' | 'followUs') => {
+      setFooterSectionsOpen((prev) => ({
+        ...prev,
+        [section]: !prev[section],
+      }));
+    },
+    []
+  );
 
   return (
     <>
@@ -291,7 +304,6 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
         <div className={styles.mainContent}>
           {isHydrated && isSidebarOpen && (
             <Sidebar
-              categories={categories}
               onFilterChange={handleFilterChange}
               isOpen={isSidebarOpen}
               onClose={closeSidebar}
@@ -314,64 +326,87 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
             )}
           </section>
         </div>
+      </div>
 
+      <footer className={styles.footer}>
         <section className={styles.newsletter} aria-label="Newsletter signup">
-          <div className={styles.newsletterContent}>
-            <h2 className={styles.newsletterTitle}>BE THE FIRST TO KNOW</h2>
-            <p className={styles.newsletterDescription}>
-              Sign up for updates from mettā muse.
-            </p>
-            <form className={styles.newsletterForm} aria-label="Newsletter subscription">
-              <div className={styles.newsletterInputGroup}>
-                <input
-                  type="email"
-                  placeholder="Enter your e-mail..."
-                  className={styles.newsletterInput}
-                  aria-label="Email address"
-                  required
-                />
-                <button 
-                  type="submit" 
-                  className={styles.newsletterButton}
-                  aria-label="Subscribe to newsletter"
-                >
-                  SUBSCRIBE
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div className={styles.contactInfo}>
-            <h3 className={styles.contactTitle}>CONTACT US</h3>
-            <p className={styles.contactPhone}>+44 221 133 5360</p>
-            <p className={styles.contactEmail}>customercare@mettamuse.com</p>
-            
-            <div className={styles.currency}>
-              <h4 className={styles.currencyTitle}>CURRENCY</h4>
-              <div className={styles.currencySelector}>
-                <div className={styles.currencyFlagWrapper}>
-                  <Image
-                    src="/usa.png"
-                    alt="USA flag"
-                    width={24}
-                    height={24}
-                    className={styles.currencyFlag}
-                  />
-                </div>
-                <span className={styles.currencyBullet}>◆</span>
-                <span className={styles.currencyCode}>USD</span>
-              </div>
-              <p className={styles.currencyNote}>
-                Transactions will be completed in Euros and a currency reference is available on hover.
+          <div className={styles.newsletterInner}>
+            <div className={styles.newsletterContent}>
+              <h2 className={styles.newsletterTitle}>BE THE FIRST TO KNOW</h2>
+              <p className={styles.newsletterDescription}>
+                Sign up for updates from mettā muse.
               </p>
+              <form className={styles.newsletterForm} aria-label="Newsletter subscription">
+                <div className={styles.newsletterInputGroup}>
+                  <input
+                    type="email"
+                    placeholder="Enter your e-mail..."
+                    className={styles.newsletterInput}
+                    aria-label="Email address"
+                    required
+                  />
+                  <button 
+                    type="submit" 
+                    className={styles.newsletterButton}
+                    aria-label="Subscribe to newsletter"
+                  >
+                    SUBSCRIBE
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div className={styles.contactInfo}>
+              <h3 className={styles.contactTitle}>CONTACT US</h3>
+              <p className={styles.contactPhone}>+44 221 133 5360</p>
+              <p className={styles.contactEmail}>customercare@mettamuse.com</p>
+              
+              <div className={styles.currency}>
+                <h4 className={styles.currencyTitle}>CURRENCY</h4>
+                <div className={styles.currencySelector}>
+                  <div className={styles.currencyFlagWrapper}>
+                    <Image
+                      src="/usa.png"
+                      alt="USA flag"
+                      width={24}
+                      height={24}
+                      className={styles.currencyFlag}
+                    />
+                  </div>
+                  <span className={styles.currencyBullet}>◆</span>
+                  <span className={styles.currencyCode}>USD</span>
+                </div>
+                <p className={styles.currencyNote}>
+                  Transactions will be completed in Euros and a currency reference is available on hover.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <footer className={styles.footer}>
-          <div className={styles.footerContent}>
-            <div className={styles.footerColumn}>
+        <div className={styles.footerContent}>
+          <div className={styles.footerColumn}>
+            <button
+              type="button"
+              className={styles.footerAccordionHeader}
+              onClick={() => toggleFooterSection('metaMuse')}
+              aria-expanded={footerSectionsOpen.metaMuse}
+            >
               <h3 className={styles.footerTitle}>mettā muse</h3>
+              <span
+                className={`${styles.footerAccordionIcon} ${
+                  footerSectionsOpen.metaMuse ? styles.footerAccordionIconOpen : ''
+                }`}
+                aria-hidden="true"
+              >
+                ▼
+              </span>
+            </button>
+            <div
+              className={`${styles.footerAccordionContent} ${
+                footerSectionsOpen.metaMuse ? styles.footerAccordionContentOpen : ''
+              }`}
+            >
               <ul className={styles.footerLinks}>
                 <li><a href="/about">About Us</a></li>
                 <li><a href="/stories">Stories</a></li>
@@ -381,9 +416,30 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
                 <li><a href="/compliance">EU Compliances Docs</a></li>
               </ul>
             </div>
+          </div>
 
-            <div className={styles.footerColumn}>
+          <div className={styles.footerColumn}>
+            <button
+              type="button"
+              className={styles.footerAccordionHeader}
+              onClick={() => toggleFooterSection('quickLinks')}
+              aria-expanded={footerSectionsOpen.quickLinks}
+            >
               <h3 className={styles.footerTitle}>QUICK LINKS</h3>
+              <span
+                className={`${styles.footerAccordionIcon} ${
+                  footerSectionsOpen.quickLinks ? styles.footerAccordionIconOpen : ''
+                }`}
+                aria-hidden="true"
+              >
+                ▼
+              </span>
+            </button>
+            <div
+              className={`${styles.footerAccordionContent} ${
+                footerSectionsOpen.quickLinks ? styles.footerAccordionContentOpen : ''
+              }`}
+            >
               <ul className={styles.footerLinks}>
                 <li><a href="/orders">Orders & Shipping</a></li>
                 <li><a href="/seller">Join/Login as a Seller</a></li>
@@ -394,9 +450,30 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
                 <li><a href="/terms">Terms & Conditions</a></li>
               </ul>
             </div>
+          </div>
 
-            <div className={styles.footerColumn}>
+          <div className={styles.footerColumn}>
+            <button
+              type="button"
+              className={styles.footerAccordionHeader}
+              onClick={() => toggleFooterSection('followUs')}
+              aria-expanded={footerSectionsOpen.followUs}
+            >
               <h3 className={styles.footerTitle}>FOLLOW US</h3>
+              <span
+                className={`${styles.footerAccordionIcon} ${
+                  footerSectionsOpen.followUs ? styles.footerAccordionIconOpen : ''
+                }`}
+                aria-hidden="true"
+              >
+                ▼
+              </span>
+            </button>
+            <div
+              className={`${styles.footerAccordionContent} ${
+                footerSectionsOpen.followUs ? styles.footerAccordionContentOpen : ''
+              }`}
+            >
               <div className={styles.socialLinks}>
                 <a href="https://instagram.com" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -409,38 +486,39 @@ const ProductListingPage: React.FC<ProductListingPageProps> = ({
                   </svg>
                 </a>
               </div>
-              
-              <div className={styles.paymentAccepts}>
-                <h4 className={styles.paymentTitle}>mettā muse ACCEPTS</h4>
-                <div className={styles.paymentMethods}>
-                  <div >
-                    <Image src="/Gpay.png" alt="GPay" width={40} height={24} />
-                  </div>
-                  <div >
-                    <Image src="/mastercard.png" alt="Mastercard" width={40} height={24} />
-                  </div>
-                  <div>
-                    <Image src="/paypal.png" alt="PayPal" width={40} height={24} />
-                  </div>
-                  <div>
-                    <Image src="/amex.png" alt="Amex" width={40} height={24} />
-                  </div>
-                  <div>
-                    <Image src="/ApplePay.png" alt="Apple Pay" width={40} height={24} />
-                  </div>
-                  <div>
-                    <Image src="/pay.png" alt="OPay" width={40} height={24} />
-                  </div>
+            </div>
+
+            <div className={styles.paymentAccepts}>
+              <h4 className={styles.paymentTitle}>mettā muse ACCEPTS</h4>
+              <div className={styles.paymentMethods}>
+                <div >
+                  <Image src="/Gpay.png" alt="GPay" width={40} height={24} />
+                </div>
+                <div >
+                  <Image src="/mastercard.png" alt="Mastercard" width={40} height={24} />
+                </div>
+                <div>
+                  <Image src="/paypal.png" alt="PayPal" width={40} height={24} />
+                </div>
+                <div>
+                  <Image src="/amex.png" alt="Amex" width={40} height={24} />
+                </div>
+                <div>
+                  <Image src="/ApplePay.png" alt="Apple Pay" width={40} height={24} />
+                </div>
+                <div>
+                  <Image src="/pay.png" alt="OPay" width={40} height={24} />
                 </div>
               </div>
             </div>
+          </div>
+
           </div>
           
           <div className={styles.footerBottom}>
             <p>Copyright &copy; 2023 mettamuse. All rights reserved.</p>
           </div>
-        </footer>
-      </div>
+      </footer>
     </>
   );
 };

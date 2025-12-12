@@ -11,11 +11,3 @@ export interface Product {
   };
 }
 
-export interface ProductFilters {
-  category?: string;
-  priceRange?: {
-    min: number;
-    max: number;
-  };
-  sortBy?: 'price-low' | 'price-high' | 'name' | 'newest';
-}
