@@ -1,5 +1,5 @@
 import React from 'react';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { getAllProducts } from '@/lib/api';
 import { Product } from '@/types/product';
 import Header from '@/components/Header/Header';
@@ -52,3 +52,5 @@ export default async function Home() {
     </>
   );
 }
+
+export const dynamic = 'force-dynamic';
