@@ -196,23 +196,6 @@
   color: #333333;
 }
 
-.clearButton {
-  margin: 20px;
-  padding: 10px 20px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
-}
-
-.clearButton:hover {
-  background-color: #c82333;
-}
-
-/* Mobile Styles */
 @media (max-width: 768px) {
   .overlay {
     display: block;
@@ -259,11 +242,5 @@
   .filterOption {
     font-size: 13px;
     margin-bottom: 8px;
-  }
-
-  .clearButton {
-    margin: 15px;
-    padding: 8px 16px;
-    font-size: 13px;
   }
 }

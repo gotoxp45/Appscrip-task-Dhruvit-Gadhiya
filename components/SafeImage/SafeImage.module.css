@@ -1,4 +1,3 @@
-/* SafeImage Component Styles */
 .safeImageFallback {
   display: flex;
   align-items: center;
@@ -31,7 +30,6 @@
   }
 }
 
-/* When used with fill prop */
 .safeImageFallback.fill,
 .safeImageLoading.fill {
   position: absolute;
@@ -43,7 +41,6 @@
   height: 100%;
 }
 
-/* Responsive text sizes */
 @media (max-width: 768px) {
   .safeImageFallback,
   .safeImageLoading {

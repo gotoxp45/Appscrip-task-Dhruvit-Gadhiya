@@ -26,4 +26,3 @@ const AnnouncementBar: React.FC = () => {
 
 export default AnnouncementBar;
 
-

@@ -1,11 +1,9 @@
-/* Product Listing Page Styles */
 .container {
   min-height: 100vh;
   background-color: #ffffff;
   font-family: 'Arial', 'Helvetica', sans-serif;
 }
 
-/* Page Header */
 .pageHeader {
   text-align: center;
   padding: 3rem 1rem;
@@ -30,7 +28,6 @@
   margin: 0 auto;
 }
 
-/* Controls Section */
 .controls {
   display: flex;
   justify-content: space-between;
@@ -166,13 +163,11 @@
   white-space: nowrap;
 }
 
-/* Main Content */
 .mainContent {
   display: flex;
   min-height: calc(100vh - 200px);
 }
 
-/* Products Section */
 .productsSection {
   flex: 1;
   padding: 2rem;
@@ -212,7 +207,6 @@
   color: #666666;
 }
 
-/* Newsletter Section */
 .newsletter {
   background-color: #000000;
   color: #ffffff;
@@ -363,7 +357,6 @@
   max-width: 320px;
 }
 
-/* Footer */
 .footer {
   background-color: #000000;
   color: #ffffff;
@@ -483,7 +476,6 @@
   font-size: 0.75rem;
 }
 
-/* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .pageHeader {
     padding: 2.5rem 1rem;
@@ -631,7 +623,6 @@
   }
 }
 
-/* Tablet Responsive Styles */
 @media (min-width: 769px) and (max-width: 1024px) {
   .pageTitle {
     font-size: 2.25rem;
@@ -656,7 +647,6 @@
   }
 }
 
-/* Large Desktop Styles */
 @media (min-width: 1200px) {
   .container {
     max-width: 1400px;
@@ -669,7 +659,6 @@
   }
 }
 
-/* Focus Styles for Accessibility */
 .filterToggle:focus,
 .sortSelect:focus,
 .newsletterInput:focus,
@@ -678,7 +667,6 @@
   outline-offset: 2px;
 }
 
-/* High Contrast Mode Support */
 @media (prefers-contrast: high) {
   .filterToggle {
     border: 1px solid currentColor;

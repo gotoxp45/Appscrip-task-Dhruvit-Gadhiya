@@ -150,7 +150,6 @@
   flex-grow: 1;
 }
 
-/* Mobile Styles */
 @media (max-width: 768px) {
   .imageContainer {
     height: 200px;

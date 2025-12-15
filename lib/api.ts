@@ -1,21 +1,11 @@
 import { Product } from '@/types/product';
-
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? 'https://fakestoreapi.com';
+import fs from "fs";
+import path from "path";
 
 export async function getAllProducts(): Promise<Product[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/products`, {
-      // Cache and revalidate the response every hour
-      next: { revalidate: 3600 },
-    });
-
-    if (!res.ok) {
-      console.warn('Failed to fetch products:', res.status, res.statusText);
-      return [];
-    }
-
-    const products: Product[] = await res.json();
+    const filePath = path.join(process.cwd(), "lib/data.json");
+    const products = JSON.parse(fs.readFileSync(filePath, "utf8"));
     return products;
   } catch (error) {
     console.warn('Network error fetching products:', error);
